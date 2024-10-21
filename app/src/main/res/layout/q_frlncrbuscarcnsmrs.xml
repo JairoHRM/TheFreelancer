@@ -36,7 +36,7 @@
         android:layout_width="148dp"
         android:layout_height="115dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="55dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,81 +47,56 @@
         android:id="@+id/n_nameoremail"
         android:layout_width="350dp"
         android:layout_height="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="Nombre"
+        android:hint="Nombre o correo"
         android:inputType="text"
         android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/q_categoria"
         android:layout_width="350dp"
         android:layout_height="60dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
-        android:hint="correo@correo.com"
-        android:inputType="textEmailAddress"
+        android:hint="Categoría"
+        android:inputType="textPassword"
         android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/n_nameoremail" />
 
-    <EditText
-        android:id="@+id/q_categoria"
-        android:layout_width="350dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:textSize="19sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
-
-    <EditText
-        android:id="@+id/phone"
-        android:layout_width="350dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="Teléfono"
-        android:inputType="phone"
-        android:textSize="19sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/r_enviarmssg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/q_categoria" />
-
-    <Button
-        android:id="@+id/r_enviarmssg"
-        android:layout_width="175dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:text="Freelancer"
-        android:textSize="22dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone" />
-
     <Button
         android:id="@+id/n_buscarfrlncrs"
-        android:layout_width="175dp"
+        android:layout_width="220dp"
         android:layout_height="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
-        android:text="Consumidor"
+        android:text="Buscar"
         android:textSize="22dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.93"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone" />
+        app:layout_constraintTop_toBottomOf="@+id/q_categoria" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:text="Filtros de búsqueda"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

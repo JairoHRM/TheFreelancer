@@ -36,7 +36,7 @@
         android:layout_width="148dp"
         android:layout_height="115dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="55dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,9 +47,9 @@
         android:id="@+id/n_nameoremail"
         android:layout_width="350dp"
         android:layout_height="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="60dp"
         android:ems="10"
-        android:hint="Nombre"
+        android:hint="Nombre o correo"
         android:inputType="text"
         android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,24 +58,10 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/email"
-        android:layout_width="350dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="correo@correo.com"
-        android:inputType="textEmailAddress"
-        android:textSize="19sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/n_nameoremail" />
-
-    <EditText
         android:id="@+id/q_categoria"
         android:layout_width="350dp"
         android:layout_height="60dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
@@ -83,45 +69,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
-
-    <EditText
-        android:id="@+id/phone"
-        android:layout_width="350dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="Teléfono"
-        android:inputType="phone"
-        android:textSize="19sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/r_enviarmssg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/q_categoria" />
+        app:layout_constraintTop_toBottomOf="@+id/n_nameoremail" />
 
     <Button
         android:id="@+id/r_enviarmssg"
         android:layout_width="175dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:text="Freelancer"
         android:textSize="22dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone" />
+        app:layout_constraintTop_toBottomOf="@+id/q_categoria" />
 
     <Button
         android:id="@+id/n_buscarfrlncrs"
         android:layout_width="175dp"
         android:layout_height="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
         android:text="Consumidor"
         android:textSize="22dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.93"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone" />
+        app:layout_constraintTop_toBottomOf="@+id/q_categoria" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

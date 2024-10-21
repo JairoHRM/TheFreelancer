@@ -8,18 +8,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="g_frlncrcomment.xml" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="g_frlncrcomment.xml" />
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -43,25 +31,12 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/consumermessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Freelancer Comentar"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/consumermessage">
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/cnsmrprofile_image"
@@ -129,7 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
-        android:text="Comentar / Enviar mensaje..."
+        android:text="Asunto / Proyecto"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -144,51 +119,35 @@
         android:layout_marginEnd="36dp"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Escribir comentario si quieres que sea público. Escribir mensaje si quieres que solo le llegue al Freelancer..."
+        android:hint="Escribir mensaje"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/p_asuntoproyecto" />
-
-    <EditText
-        android:id="@+id/calificarbox"
-        android:layout_width="wrap_content"
-        android:layout_height="60sp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="36dp"
-        android:ems="10"
-        android:hint="Calificación de 1 a 5"
-        android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/commentbox" />
 
     <Button
         android:id="@+id/r_enviarmssg"
         android:layout_width="180dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="Comentario"
+        android:layout_marginTop="50dp"
+        android:text="Descartar"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calificarbox"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/commentbox" />
 
     <Button
         android:id="@+id/r_enviarmssg"
         android:layout_width="180dp"
         android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="Mensaje"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="10dp"
+        android:text="Contestar"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/r_enviarmssg"
-        app:layout_constraintTop_toBottomOf="@+id/calificarbox" />
+        app:layout_constraintTop_toBottomOf="@+id/commentbox" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

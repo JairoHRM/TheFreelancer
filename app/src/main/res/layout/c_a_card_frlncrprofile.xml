@@ -23,7 +23,7 @@
             android:layout_height="110dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/frlncrprofile_image"
+                android:id="@+id/cnsmrprofile_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="20dp"
@@ -36,7 +36,7 @@
                 app:layout_constraintVertical_bias="0.5" />
 
             <TextView
-                android:id="@+id/frlncrname"
+                android:id="@+id/cnsmrname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
@@ -44,31 +44,31 @@
                 android:text="Name"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@+id/frlncrtitle"
-                app:layout_constraintStart_toEndOf="@+id/frlncrprofile_image"
+                app:layout_constraintBottom_toTopOf="@+id/sectoreconomico"
+                app:layout_constraintStart_toEndOf="@+id/cnsmrprofile_image"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/frlncrtitle"
+                android:id="@+id/sectoreconomico"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
                 android:text="Profesión"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/frlncrcalif"
-                app:layout_constraintStart_toEndOf="@+id/frlncrprofile_image"
-                app:layout_constraintTop_toBottomOf="@+id/frlncrname" />
+                app:layout_constraintBottom_toTopOf="@+id/proyectoscantidad"
+                app:layout_constraintStart_toEndOf="@+id/cnsmrprofile_image"
+                app:layout_constraintTop_toBottomOf="@+id/cnsmrname" />
 
             <TextView
-                android:id="@+id/frlncrcalif"
+                android:id="@+id/proyectoscantidad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
                 android:text="Calificación"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/frlncrcomments"
-                app:layout_constraintStart_toEndOf="@+id/frlncrprofile_image"
-                app:layout_constraintTop_toBottomOf="@+id/frlncrtitle" />
+                app:layout_constraintStart_toEndOf="@+id/cnsmrprofile_image"
+                app:layout_constraintTop_toBottomOf="@+id/sectoreconomico" />
 
             <TextView
                 android:id="@+id/frlncrcomments"
@@ -78,8 +78,8 @@
                 android:text="Comentarios"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/frlncrprofile_image"
-                app:layout_constraintTop_toBottomOf="@+id/frlncrcalif" />
+                app:layout_constraintStart_toEndOf="@+id/cnsmrprofile_image"
+                app:layout_constraintTop_toBottomOf="@+id/proyectoscantidad" />
 
             <TextView
                 android:id="@+id/vermasfrlncr"

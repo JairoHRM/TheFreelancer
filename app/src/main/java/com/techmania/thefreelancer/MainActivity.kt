@@ -1,6 +1,8 @@
 package com.techmania.thefreelancer
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.`Entrada.xml`)
+        setContentView(R.layout.a_entrada)
 
         toolbar = findViewById(R.id.toolbar)
 
@@ -50,5 +52,14 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val registroButton: Button = findViewById(R.id.registro)
+
+        registroButton.setOnClickListener {
+            // Cambiar a la actividad de registro
+            val intent = Intent(this, b_registroActivity::class.java)
+            startActivity(intent)  // Iniciar la actividad de registro
+        }
+
     }
 }
