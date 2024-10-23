@@ -13,17 +13,83 @@
         android:theme="@style/Theme.TheFreelancer"
         tools:targetApi="31">
         <activity
-            android:name=".a_entradaActivity"
-            android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
-
+            android:name=".s_frlncrreadmssgsActivity"
+            android:exported="true"
+            android:parentActivityName=".t_frlncrtodayActivity"/>
+        <activity
+            android:name=".r_frlncrmssgsreceivedActivity"
+            android:exported="true"
+            android:parentActivityName=".t_frlncrtodayActivity" />
+        <activity
+            android:name=".q_frlncrbuscarcnsmrsActivity"
+            android:exported="true"
+            android:parentActivityName=".t_frlncrtodayActivity" />
+        <activity
+            android:name=".p_csmrreadmssgsActivity"
+            android:exported="true"
+            android:parentActivityName=".o_cnsmrmssgsActivity" />
+        <activity
+            android:name=".o_cnsmrmssgsActivity"
+            android:exported="true"
+            android:parentActivityName=".m_cnsmrtodayActivity" />
+        <activity
+            android:name=".n_cnsmrbuscarfrlncrsActivity"
+            android:exported="true"
+            android:parentActivityName=".m_cnsmrtodayActivity" />
+        <activity
+            android:name=".t_frlncrtodayActivity"
+            android:exported="true"
+            android:parentActivityName=".l_entrarActivity" />
+        <activity
+            android:name=".m_cnsmrtodayActivity"
+            android:exported="true"
+            android:parentActivityName=".l_entrarActivity" />
+        <activity
+            android:name=".k_cnsmrmessageActivity"
+            android:exported="true"
+            android:parentActivityName=".j_frlncrmssgsActivity" />
+        <activity
+            android:name=".j_frlncrmssgsActivity"
+            android:exported="true"
+            android:parentActivityName=".i_cnsmrdirectoryActivity" />
+        <activity
+            android:name=".i_cnsmrdirectoryActivity"
+            android:exported="true"
+            android:parentActivityName=".h_cnsmrprofeditActivity" />
+        <activity
+            android:name=".g_frlncrcommentActivity"
+            android:exported="true"
+            android:parentActivityName=".f_frlncrreadcommentsActivity" />
+        <activity
+            android:name=".f_frlncrreadcommentsActivity"
+            android:exported="true"
+            android:parentActivityName=".e_frlncrcommentsActivity" />
+        <activity
+            android:name=".e_frlncrcommentsActivity"
+            android:exported="true"
+            android:parentActivityName=".d_frlncrdirectoryActivity" />
+        <activity
+            android:name=".d_frlncrdirectoryActivity"
+            android:exported="true"
+            android:parentActivityName=".c_frlncrprofeditActivity" />
+        <activity
+            android:name=".h_cnsmrprofeditActivity"
+            android:exported="true"
+            android:parentActivityName=".b_registroActivity" />
+        <activity
+            android:name=".c_frlncrprofeditActivity"
+            android:exported="true"
+            android:parentActivityName=".b_registroActivity" />
+        <activity
+            android:name=".l_entrarActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity_a_entrada" />
         <activity
             android:name=".b_registroActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity_a_entrada" />
+        <activity
+            android:name=".MainActivity_a_entrada"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,17 +97,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
     </application>
 
 </manifest>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".h_cnsmrprofeditActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -32,7 +32,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
-        android:id="@+id/consumermessage"
+        android:id="@+id/h_cnsmrprofile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -52,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/cnsmrprofile_image"
+            android:id="@+id/h_cnsmrprof_image"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginStart="20dp"
@@ -65,7 +65,7 @@
             app:layout_constraintVertical_bias="0.5" />
 
         <TextView
-            android:id="@+id/cnsmrname"
+            android:id="@+id/h_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -73,38 +73,38 @@
             android:text="Nombre"
             android:textColor="@color/black"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/sectoreconomico"
-            app:layout_constraintStart_toEndOf="@+id/cnsmrprofile_image"
+            app:layout_constraintBottom_toTopOf="@+id/h_sector"
+            app:layout_constraintStart_toEndOf="@+id/h_cnsmrprof_image"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread" />
 
         <TextView
-            android:id="@+id/sectoreconomico"
+            android:id="@+id/h_sector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:text="Sector económico"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/proyectoscantidad"
-            app:layout_constraintStart_toEndOf="@+id/cnsmrprofile_image"
-            app:layout_constraintTop_toBottomOf="@+id/cnsmrname" />
+            app:layout_constraintBottom_toTopOf="@+id/h_qproyectos"
+            app:layout_constraintStart_toEndOf="@+id/h_cnsmrprof_image"
+            app:layout_constraintTop_toBottomOf="@+id/h_name" />
 
         <TextView
-            android:id="@+id/proyectoscantidad"
+            android:id="@+id/h_qproyectos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:text="Número proyectos contratados"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/cnsmrprofile_image"
-            app:layout_constraintTop_toBottomOf="@+id/sectoreconomico" />
+            app:layout_constraintStart_toEndOf="@+id/h_cnsmrprof_image"
+            app:layout_constraintTop_toBottomOf="@+id/h_sector" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
-        android:id="@+id/cnsmrnecesidad"
+        android:id="@+id/h_need"
         android:layout_width="350dp"
         android:layout_height="55dp"
         android:layout_marginTop="10dp"
@@ -118,7 +118,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <EditText
-        android:id="@+id/cnsmrbuscafrlncr"
+        android:id="@+id/h_profesionalbuscado"
         android:layout_width="350dp"
         android:layout_height="55dp"
         android:ems="10"
@@ -128,7 +128,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cnsmrnecesidad" />
+        app:layout_constraintTop_toBottomOf="@+id/h_need" />
 
     <EditText
         android:id="@+id/h_categoria"
@@ -140,10 +140,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cnsmrbuscafrlncr" />
+        app:layout_constraintTop_toBottomOf="@+id/h_profesionalbuscado" />
 
     <EditText
-        android:id="@+id/presupuesto"
+        android:id="@+id/h_presupuesto"
         android:layout_width="350dp"
         android:layout_height="55dp"
         android:ems="10"
@@ -156,7 +156,7 @@
         app:layout_constraintTop_toBottomOf="@+id/h_categoria" />
 
     <EditText
-        android:id="@+id/fechaentrega"
+        android:id="@+id/h_fechaentr"
         android:layout_width="350dp"
         android:layout_height="55dp"
         android:ems="10"
@@ -166,10 +166,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/presupuesto" />
+        app:layout_constraintTop_toBottomOf="@+id/h_presupuesto" />
 
     <Button
-        android:id="@+id/r_enviarmssg"
+        android:id="@+id/h_guardar"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_marginTop="580dp"

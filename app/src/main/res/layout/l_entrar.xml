@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".l_entrarActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -32,7 +32,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/l_logo"
         android:layout_width="148dp"
         android:layout_height="115dp"
         android:layout_gravity="center_horizontal"
@@ -44,7 +44,7 @@
         app:srcCompat="@drawable/frlncrlogo1" />
 
     <EditText
-        android:id="@+id/n_nameoremail"
+        android:id="@+id/l_nameoremail"
         android:layout_width="350dp"
         android:layout_height="60dp"
         android:layout_marginTop="60dp"
@@ -55,10 +55,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/l_logo" />
 
     <EditText
-        android:id="@+id/q_categoria"
+        android:id="@+id/l_contrasena"
         android:layout_width="350dp"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
@@ -69,10 +69,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/n_nameoremail" />
+        app:layout_constraintTop_toBottomOf="@+id/l_nameoremail" />
 
     <Button
-        android:id="@+id/r_enviarmssg"
+        android:id="@+id/l_freelancer"
         android:layout_width="175dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
@@ -80,10 +80,10 @@
         android:text="Freelancer"
         android:textSize="22dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/q_categoria" />
+        app:layout_constraintTop_toBottomOf="@+id/l_contrasena" />
 
     <Button
-        android:id="@+id/n_buscarfrlncrs"
+        android:id="@+id/l_consumer"
         android:layout_width="175dp"
         android:layout_height="60dp"
         android:layout_marginTop="50dp"
@@ -93,6 +93,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.93"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/q_categoria" />
+        app:layout_constraintTop_toBottomOf="@+id/l_contrasena" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

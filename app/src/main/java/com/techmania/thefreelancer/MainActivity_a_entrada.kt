@@ -11,7 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.appbar.MaterialToolbar
 
-class MainActivity : AppCompatActivity() {
+class MainActivity_a_entrada : AppCompatActivity() {
 
     lateinit var toolbar : MaterialToolbar
 
@@ -43,8 +43,6 @@ class MainActivity : AppCompatActivity() {
 
             return@setOnMenuItemClickListener true
 
-            
-
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -56,9 +54,17 @@ class MainActivity : AppCompatActivity() {
         val registroButton: Button = findViewById(R.id.registro)
 
         registroButton.setOnClickListener {
-            // Cambiar a la actividad de registro
+            // Cambiar a la actividad de b_registro
             val intent = Intent(this, b_registroActivity::class.java)
             startActivity(intent)  // Iniciar la actividad de registro
+        }
+
+        val entrarButton: Button = findViewById(R.id.entrar)
+
+        entrarButton.setOnClickListener {
+            // Cambiar a la actividad de l_entrar
+            val intent = Intent(this, l_entrarActivity::class.java)
+            startActivity(intent)  // Iniciar la actividad de entrada
         }
 
     }

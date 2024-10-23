@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity_a_entrada">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -96,12 +96,12 @@
         android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/r_enviarmssg"
+        app:layout_constraintStart_toEndOf="@+id/b_editproffrlncr"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/q_categoria" />
 
     <Button
-        android:id="@+id/r_enviarmssg"
+        android:id="@+id/b_editproffrlncr"
         android:layout_width="175dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
@@ -112,7 +112,7 @@
         app:layout_constraintTop_toBottomOf="@+id/phone" />
 
     <Button
-        android:id="@+id/n_buscarfrlncrs"
+        android:id="@+id/b_editprofcnsmr"
         android:layout_width="175dp"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity_a_entrada">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -44,7 +44,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
-        android:id="@+id/p_asuntoproyecto"
+        android:id="@+id/s_asuntoproyecto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/s_cnsmrcard" />
 
     <EditText
-        android:id="@+id/commentbox"
+        android:id="@+id/s_mssg"
         android:layout_width="350dp"
         android:layout_height="180dp"
         android:layout_marginTop="22dp"
@@ -67,31 +67,31 @@
         android:hint="Escribir mensaje"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/p_asuntoproyecto" />
+        app:layout_constraintTop_toBottomOf="@+id/s_asuntoproyecto" />
 
     <Button
-        android:id="@+id/r_enviarmssg"
+        android:id="@+id/s_descartar"
         android:layout_width="180dp"
         android:layout_height="60dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
         android:text="Descartar"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/s_contestar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/commentbox" />
+        app:layout_constraintTop_toBottomOf="@+id/s_mssg" />
 
     <Button
-        android:id="@+id/r_enviarmssg"
+        android:id="@+id/s_contestar"
         android:layout_width="180dp"
         android:layout_height="60dp"
         android:layout_marginEnd="10dp"
         android:text="Contestar"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/r_enviarmssg"
-        app:layout_constraintTop_toBottomOf="@+id/commentbox" />
+        app:layout_constraintStart_toEndOf="@+id/s_descartar"
+        app:layout_constraintTop_toBottomOf="@+id/s_mssg" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/s_cnsmrcard"
@@ -104,7 +104,7 @@
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/cnsmrprofile_image"
+            android:id="@+id/s_cnsmprofile_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="20dp"
@@ -117,7 +117,7 @@
             app:layout_constraintVertical_bias="0.5" />
 
         <TextView
-            android:id="@+id/cnsmrname"
+            android:id="@+id/s_cnsmrname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
@@ -125,33 +125,33 @@
             android:text="Nombre"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/sectoreconomico"
-            app:layout_constraintStart_toEndOf="@+id/cnsmrprofile_image"
+            app:layout_constraintBottom_toTopOf="@+id/s_sector"
+            app:layout_constraintStart_toEndOf="@+id/s_cnsmprofile_image"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/sectoreconomico"
+            android:id="@+id/s_sector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:text="Sector económico"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/proyectoscantidad"
-            app:layout_constraintStart_toEndOf="@+id/cnsmrprofile_image"
-            app:layout_constraintTop_toBottomOf="@+id/cnsmrname" />
+            app:layout_constraintBottom_toTopOf="@+id/s_projects"
+            app:layout_constraintStart_toEndOf="@+id/s_cnsmprofile_image"
+            app:layout_constraintTop_toBottomOf="@+id/s_cnsmrname" />
 
         <TextView
-            android:id="@+id/proyectoscantidad"
+            android:id="@+id/s_projects"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:text="Proyectos contratados"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/cnsmrprofile_image"
-            app:layout_constraintTop_toBottomOf="@+id/sectoreconomico" />
+            app:layout_constraintStart_toEndOf="@+id/s_cnsmprofile_image"
+            app:layout_constraintTop_toBottomOf="@+id/s_sector" />
 
         <TextView
-            android:id="@+id/vermasfrlncr"
+            android:id="@+id/s_vermas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="194dp"
@@ -160,8 +160,8 @@
             android:text="Ver mas..."
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cnsmrprofile_image"
-            app:layout_constraintTop_toBottomOf="@+id/proyectoscantidad" />
+            app:layout_constraintStart_toEndOf="@+id/s_cnsmprofile_image"
+            app:layout_constraintTop_toBottomOf="@+id/s_projects" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
