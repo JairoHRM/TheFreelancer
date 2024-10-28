@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "994629618674",
+    "project_id": "maventech1st",
+    "storage_bucket": "maventech1st.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994629618674:android:0606642faf58489f1df96b",
+        "android_client_info": {
+          "package_name": "com.techmania.thefreelancer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlvPoEoHesRU2s1XcYM4CDxy63Pz594aU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
