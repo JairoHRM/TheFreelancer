@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_post"
+        android:title="Postear"
+        android:icon="@drawable/add_post"/>
+
+    <item
+        android:id="@+id/nav_profile"
+        android:title="Perfil"
+        android:icon="@drawable/profile"/>
+
+    <item
+        android:id="@+id/nav_home"
+        android:title="Inicio"
+        android:icon="@drawable/home"/>
+
+    <item
+        android:id="@+id/nav_freelancers"
+        android:title="Freelancers"
+        android:icon="@drawable/freelancers"/>
+
+    <item
+        android:id="@+id/nav_find_freelancers"
+        android:title="Encontrar Freelancers"
+        android:icon="@drawable/find_freelancers"/>
+
+    <item
+        android:id="@+id/nav_messages"
+        android:title="Mensajes"
+        android:icon="@drawable/messages"/>
+
+    <item
+        android:id="@+id/nav_settings"
+        android:title="Configuración"
+        android:icon="@drawable/settings"/>
+
+    <item
+        android:id="@+id/nav_logout"
+        android:title="Salir"
+        android:icon="@drawable/logout"/>
+
+</menu>
