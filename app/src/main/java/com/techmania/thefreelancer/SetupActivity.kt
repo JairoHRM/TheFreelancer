@@ -36,8 +36,8 @@ class SetupActivity : AppCompatActivity() {
         setContentView(R.layout.activity_setup)
 
         mAuth = FirebaseAuth.getInstance()
-        currentUserID = mAuth.currentUser!!.uid
-        usersRef = FirebaseDatabase.getInstance().reference.child("Usuarios")
+        currentUserID = mAuth.currentUser?.uid ?: ""
+        usersRef = FirebaseDatabase.getInstance().reference.child("Users").child(currentUserID)
 
         userName = findViewById(R.id.setup_username)
         fullName = findViewById(R.id.setup_full_name)
