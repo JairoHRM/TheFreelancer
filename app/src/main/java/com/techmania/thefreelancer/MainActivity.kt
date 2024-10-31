@@ -15,16 +15,23 @@ import androidx.appcompat.widget.Toolbar
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var navigationView: NavigationView
-    lateinit var drawerLayout: DrawerLayout
-    lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
-    lateinit var postList: RecyclerView
-    lateinit var mToolbar: Toolbar
-    lateinit var mAuth: FirebaseAuth
+    private lateinit var navigationView: NavigationView
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
+    private lateinit var postList: RecyclerView
+    private lateinit var mToolbar: Toolbar
+
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var usersRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mAuth = FirebaseAuth.getInstance()
+        usersRef = FirebaseDatabase.getInstance().reference.child("Users")
 
         mToolbar = findViewById(R.id.main_page_toolbar)
         setSupportActionBar(mToolbar)
@@ -60,6 +68,30 @@ class MainActivity : AppCompatActivity() {
         if (currentUser == null) {
             sendUserToLoginActivity()
         }
+        else {
+            checkUserExistence()
+        }
+    }
+
+    private fun checkUserExistence() {
+        val current_user_id = mAuth.currentUser?.uid ?: ""
+        usersRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (!dataSnapshot.exists() || dataSnapshot.child("setupCompleted").getValue(Boolean::class.java) != true) {
+                    // If user node doesn't exist or setup is not completed, go to SetupActivity
+                    sendUserToSetupActivity()
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+    }
+
+    private fun sendUserToSetupActivity() {
+        val setupIntent = Intent(this@MainActivity, SetupActivity::class.java)
+        setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(setupIntent)
+        finish()
     }
 
     private fun sendUserToLoginActivity() {

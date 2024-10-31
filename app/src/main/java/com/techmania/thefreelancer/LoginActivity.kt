@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 
 class LoginActivity : AppCompatActivity() {
@@ -41,6 +42,15 @@ class LoginActivity : AppCompatActivity() {
 
         loginButton.setOnClickListener {
             allowUserToLogin()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val currentUser: FirebaseUser? = mAuth.currentUser
+
+        if (currentUser != null) {
+            sendUserToMainActivity()
         }
     }
 
@@ -77,6 +87,8 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+
+
     }
 
     private fun sendUserToMainActivity() {

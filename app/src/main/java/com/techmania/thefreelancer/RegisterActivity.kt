@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -39,7 +40,22 @@ class RegisterActivity : AppCompatActivity() {
         createAccountButton.setOnClickListener {
             CreateNewAccount()
         }
+    }
 
+    override fun onStart() {
+        super.onStart()
+        val currentUser: FirebaseUser? = mAuth.currentUser
+
+        if (currentUser != null) {
+            sendUserToMainActivity()
+        }
+    }
+
+    private fun sendUserToMainActivity() {
+        var mainActivityIntent = Intent(this, MainActivity::class.java)
+        mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(mainActivityIntent)
+        finish()
     }
 
     private fun CreateNewAccount() {
