@@ -9,15 +9,18 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
+        maven { url = uri("https://jitpack.io") } // Add JitPack repository here
     }
 }
 
-rootProject.name = "TheFreelancer"
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS) // Prefer settings repositories over project repositories
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://jitpack.io") } // Add JitPack repository here
+    }
+}
+
+rootProject.name = "TheFreelancer" // Adjust this to your project name
 include(":app")

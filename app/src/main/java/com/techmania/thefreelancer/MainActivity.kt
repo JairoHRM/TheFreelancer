@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -20,6 +21,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import de.hdodenhof.circleimageview.CircleImageView
+import com.squareup.picasso.Picasso
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,8 +33,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var postList: RecyclerView
     private lateinit var mToolbar: Toolbar
 
+    private lateinit var navProfileImage: CircleImageView
+    private lateinit var navProfileUserName: TextView
+
     private lateinit var mAuth: FirebaseAuth
     private lateinit var usersRef: DatabaseReference
+
+    private lateinit var currentUserID: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mAuth = FirebaseAuth.getInstance()
+        currentUserID = mAuth.getCurrentUser()?.getUid() ?: ""
         usersRef = FirebaseDatabase.getInstance().reference.child("Users")
 
         mToolbar = findViewById(R.id.main_page_toolbar)
@@ -51,7 +60,32 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val navView: View = navigationView.inflateHeaderView(R.layout.navigation_header)
+        navProfileImage = navView.findViewById(R.id.nav_profile_image)
+        navProfileUserName = navView.findViewById(R.id.nav_user_full_name)
+
+        usersRef.child(currentUserID).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    dataSnapshot.child("fullname").getValue(String::class.java)?.let { fullname ->
+                        navProfileUserName.text = fullname
+                    }
+
+                    if (dataSnapshot.hasChild("profileimage")) {
+                        dataSnapshot.child("profileimage").getValue(String::class.java)?.let { image ->
+                            Picasso.get().load(image).placeholder(R.drawable.profile).into(navProfileImage)
+                        }
+                    } else {
+                        Toast.makeText(this@MainActivity, "Profile name does not exist...", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle error
+            }
+        })
 
         navigationView.setNavigationItemSelectedListener { item ->
             UserMenuSelector(item)

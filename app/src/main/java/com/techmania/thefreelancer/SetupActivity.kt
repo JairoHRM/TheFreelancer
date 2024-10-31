@@ -2,20 +2,21 @@ package com.techmania.thefreelancer
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.yalantis.ucrop.UCrop
 import de.hdodenhof.circleimageview.CircleImageView
+import java.io.File
 
 class SetupActivity : AppCompatActivity() {
 
@@ -27,17 +28,19 @@ class SetupActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var usersRef: DatabaseReference
+    private lateinit var userProfileImageRef: StorageReference
 
     private lateinit var currentUserID: String
+    private val GALLERY_PICK = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_setup)
 
         mAuth = FirebaseAuth.getInstance()
         currentUserID = mAuth.currentUser?.uid ?: ""
         usersRef = FirebaseDatabase.getInstance().reference.child("Users").child(currentUserID)
+        userProfileImageRef = FirebaseStorage.getInstance().reference.child("Profile Images")
 
         userName = findViewById(R.id.setup_username)
         fullName = findViewById(R.id.setup_full_name)
@@ -48,54 +51,95 @@ class SetupActivity : AppCompatActivity() {
         saveInformationButton.setOnClickListener {
             saveAccountSetupInformation()
         }
+
+        profileImage.setOnClickListener {
+            val galleryIntent = Intent(Intent.ACTION_GET_CONTENT).apply {
+                type = "image/*"
+            }
+            startActivityForResult(galleryIntent, GALLERY_PICK)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == GALLERY_PICK && resultCode == RESULT_OK && data != null) {
+            val imageUri = data.data
+            val destinationUri = Uri.fromFile(File(cacheDir, "cropped"))
+
+            UCrop.of(imageUri!!, destinationUri)
+                .withAspectRatio(1f, 1f)
+                .withMaxResultSize(450, 450)
+                .start(this)
+        }
+
+        if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
+            val resultUri = UCrop.getOutput(data!!)
+            if (resultUri != null) {
+                uploadProfileImage(resultUri)
+            }
+        } else if (resultCode == UCrop.RESULT_ERROR) {
+            Toast.makeText(this, "Error: Image cropping failed.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun uploadProfileImage(uri: Uri) {
+        loadingBar.setTitle("Profile Image")
+        loadingBar.setMessage("Please wait while we upload your profile image...")
+        loadingBar.show()
+
+        val filePath = userProfileImageRef.child("$currentUserID.jpg")
+        filePath.putFile(uri).continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let { throw it }
+            }
+            filePath.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val downloadUrl = task.result.toString()
+                usersRef.child("profileimage").setValue(downloadUrl).addOnCompleteListener { setValueTask ->
+                    if (setValueTask.isSuccessful) {
+                        Toast.makeText(this, "Profile Image successfully stored.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "Error storing image in database.", Toast.LENGTH_SHORT).show()
+                    }
+                    loadingBar.dismiss()
+                }
+            } else {
+                Toast.makeText(this, "Image upload failed.", Toast.LENGTH_SHORT).show()
+                loadingBar.dismiss()
+            }
+        }
     }
 
     private fun saveAccountSetupInformation() {
         val username = userName.text.toString()
         val fullname = fullName.text.toString()
 
-        when {
-            TextUtils.isEmpty(username) -> Toast.makeText(
-                this,
-                "Por favor escriba su usuario...",
-                Toast.LENGTH_SHORT
-            ).show()
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(fullname)) {
+            Toast.makeText(this, "Please enter your username and full name.", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-            TextUtils.isEmpty(fullname) -> Toast.makeText(
-                this,
-                "Por favor escriba su nombre completo...",
-                Toast.LENGTH_SHORT
-            ).show()
+        loadingBar.setTitle("Saving Account Information")
+        loadingBar.setMessage("Please wait while we save your information.")
+        loadingBar.show()
 
-            else -> {
-                loadingBar.setTitle("Guardando información de la cuenta...")
-                loadingBar.setMessage("Por favor espere, esto puede tardar unos segundos...")
-                loadingBar.show()
-                loadingBar.setCanceledOnTouchOutside(true)
+        val userMap: Map<String, Any> = mapOf(
+            "username" to username,
+            "fullname" to fullname,
+            "status" to "Hola estoy usando The Freelancer!",
+            "setupCompleted" to true
+        )
 
-                val userMap = HashMap<String, Any>()
-                userMap["username"] = username
-                userMap["fullname"] = fullname
-                userMap["status"] = "Hola estoy usando The Freelancer!"
-                userMap["setupCompleted"] = true
-
-                usersRef.child(currentUserID).updateChildren(userMap)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            sendUserToMainActivity()
-                            Toast.makeText(
-                                this@SetupActivity, "Tu cuenta ha sido creada correctamente...",
-                                Toast.LENGTH_LONG).show()
-                            loadingBar.dismiss()
-                        } else {
-                            val message = task.exception?.message
-                            Toast.makeText(
-                                this@SetupActivity, "Error al crear la cuenta: $message",
-                                Toast.LENGTH_SHORT).show()
-                            loadingBar.dismiss()
-                        }
-                    }
+        usersRef.updateChildren(userMap).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                sendUserToMainActivity()
+                Toast.makeText(this, "Account setup complete.", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "Error saving account information.", Toast.LENGTH_SHORT).show()
             }
+            loadingBar.dismiss()
         }
     }
 
