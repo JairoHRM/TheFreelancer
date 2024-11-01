@@ -2,8 +2,10 @@ package com.techmania.thefreelancer
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navProfileImage: CircleImageView
     private lateinit var navProfileUserName: TextView
+    private lateinit var addNewPostButton: ImageButton
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var usersRef: DatabaseReference
@@ -53,6 +56,8 @@ class MainActivity : AppCompatActivity() {
         mToolbar = findViewById(R.id.main_page_toolbar)
         setSupportActionBar(mToolbar)
         getSupportActionBar()?.setTitle("Inicio")
+
+        addNewPostButton = findViewById(R.id.add_new_post_button)
 
         navigationView = findViewById(R.id.navigation_view)
         drawerLayout = findViewById(R.id.drawable_layout)
@@ -77,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                             Picasso.get().load(image).placeholder(R.drawable.profile).into(navProfileImage)
                         }
                     } else {
-                        Toast.makeText(this@MainActivity, "Profile name does not exist...", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, "Nombre del perfil no existe...", Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -92,6 +97,20 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
+        navigationView.setNavigationItemSelectedListener { item ->
+            UserMenuSelector(item)
+            false
+        }
+
+        addNewPostButton.setOnClickListener {
+            sendUserToPostActivity()
+        }
+
+    }
+
+    private fun sendUserToPostActivity() {
+        val addNewPostIntent = Intent(this@MainActivity, PostActivity::class.java)
+        startActivity(addNewPostIntent)
     }
 
     override fun onStart() {
@@ -109,6 +128,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkUserExistence() {
         val current_user_id = mAuth.currentUser?.uid ?: ""
+        // Target the specific user's node in the database
+        usersRef.child(current_user_id).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Check if the user node exists and if setupCompleted is true
+                val setupCompleted = dataSnapshot.child("setupCompleted").getValue(Boolean::class.java)
+                Log.d("MainActivity", "Setup Completed: $setupCompleted")
+                if (setupCompleted != true) {
+                    sendUserToSetupActivity()
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle error if needed
+            }
+        })
+    }
+
+    /*private fun checkUserExistence() {
+        val current_user_id = mAuth.currentUser?.uid ?: ""
         usersRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (!dataSnapshot.exists() || dataSnapshot.child("setupCompleted").getValue(Boolean::class.java) != true) {
@@ -119,7 +157,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onCancelled(databaseError: DatabaseError) {}
         })
-    }
+    }*/
 
     private fun sendUserToSetupActivity() {
         val setupIntent = Intent(this@MainActivity, SetupActivity::class.java)
@@ -144,6 +182,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun UserMenuSelector(menuItem: MenuItem) {
         when (menuItem.itemId) {
+            R.id.nav_post -> {
+                sendUserToPostActivity()
+            }
+
             R.id.nav_profile -> {
                 Toast.makeText(this, "Perfil", Toast.LENGTH_SHORT).show()
             }

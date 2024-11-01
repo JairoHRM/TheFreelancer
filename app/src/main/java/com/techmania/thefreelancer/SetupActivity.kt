@@ -65,27 +65,47 @@ class SetupActivity : AppCompatActivity() {
 
         if (requestCode == GALLERY_PICK && resultCode == RESULT_OK && data != null) {
             val imageUri = data.data
-            val destinationUri = Uri.fromFile(File(cacheDir, "cropped"))
+            if (imageUri != null) {
+                try {
+                    val destinationUri = Uri.fromFile(File(cacheDir, "cropped"))
 
-            UCrop.of(imageUri!!, destinationUri)
-                .withAspectRatio(1f, 1f)
-                .withMaxResultSize(450, 450)
-                .start(this)
-        }
-
-        if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
-            val resultUri = UCrop.getOutput(data!!)
-            if (resultUri != null) {
-                uploadProfileImage(resultUri)
+                    // Start cropping with UCrop
+                    UCrop.of(imageUri, destinationUri)
+                        .withAspectRatio(1f, 1f)
+                        .withMaxResultSize(450, 450)
+                        .start(this)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    Toast.makeText(this, "No se puede cargar la imagen", Toast.LENGTH_LONG).show()
+                }
+            } else {
+                Toast.makeText(this, "No se puede tomar la imagen", Toast.LENGTH_LONG).show()
             }
-        } else if (resultCode == UCrop.RESULT_ERROR) {
-            Toast.makeText(this, "Error: Image cropping failed.", Toast.LENGTH_SHORT).show()
+        } else if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
+            data?.let {
+                val resultUri = UCrop.getOutput(it)
+                if (resultUri != null) {
+                    uploadProfileImage(resultUri)
+                } else {
+                    Toast.makeText(this, "No se puede recortar la imagen", Toast.LENGTH_LONG).show()
+                }
+            }
+        } else if (requestCode == UCrop.REQUEST_CROP && resultCode == UCrop.RESULT_ERROR) {
+            data?.let {
+                val cropError = UCrop.getError(it)
+                cropError?.let { error ->
+                    Toast.makeText(this, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+                    error.printStackTrace()
+                } ?: run {
+                    Toast.makeText(this, "Error desconocido en el recorte de la imagen", Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 
     private fun uploadProfileImage(uri: Uri) {
-        loadingBar.setTitle("Profile Image")
-        loadingBar.setMessage("Please wait while we upload your profile image...")
+        loadingBar.setTitle("Imagen de perfil")
+        loadingBar.setMessage("Por favor espere mientras cargamos la imagen...")
         loadingBar.show()
 
         val filePath = userProfileImageRef.child("$currentUserID.jpg")
@@ -97,16 +117,16 @@ class SetupActivity : AppCompatActivity() {
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val downloadUrl = task.result.toString()
-                usersRef.child("profileimage").setValue(downloadUrl).addOnCompleteListener { setValueTask ->
+                usersRef.child("Imagen de perfil").setValue(downloadUrl).addOnCompleteListener { setValueTask ->
                     if (setValueTask.isSuccessful) {
-                        Toast.makeText(this, "Profile Image successfully stored.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Imagen de perfil guardada.", Toast.LENGTH_LONG).show()
                     } else {
-                        Toast.makeText(this, "Error storing image in database.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Error en el almacenamiento de la imagen.", Toast.LENGTH_LONG).show()
                     }
                     loadingBar.dismiss()
                 }
             } else {
-                Toast.makeText(this, "Image upload failed.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "No se pudo cargar la imagen.", Toast.LENGTH_LONG).show()
                 loadingBar.dismiss()
             }
         }
@@ -117,12 +137,12 @@ class SetupActivity : AppCompatActivity() {
         val fullname = fullName.text.toString()
 
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(fullname)) {
-            Toast.makeText(this, "Please enter your username and full name.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Por favor entrar su usuario y nombre completo.", Toast.LENGTH_LONG).show()
             return
         }
 
-        loadingBar.setTitle("Saving Account Information")
-        loadingBar.setMessage("Please wait while we save your information.")
+        loadingBar.setTitle("Información de cuenta")
+        loadingBar.setMessage("Por favor espere mientras guardamos la información.")
         loadingBar.show()
 
         val userMap: Map<String, Any> = mapOf(
@@ -135,9 +155,9 @@ class SetupActivity : AppCompatActivity() {
         usersRef.updateChildren(userMap).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 sendUserToMainActivity()
-                Toast.makeText(this, "Account setup complete.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Autenticación de cuenta completa.", Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this, "Error saving account information.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error guardando la información.", Toast.LENGTH_LONG).show()
             }
             loadingBar.dismiss()
         }
